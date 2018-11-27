@@ -55,11 +55,13 @@ def new_save():
     save_data = ['10', '20', '20', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0']
     for val in save_data:
         save.write(val + ',')
+    save.close()
 
 
 def start():
     save = open(SAVE_FILE, 'r')
     save_data = save.readline().split(',')
+    save.close()
     for i in range(50):
         print()
     game_loop(save_data)
@@ -76,6 +78,7 @@ def save_game(save_data):
     save = open(SAVE_FILE, 'w')
     for val in save_data:
         save.write(str(val) + ',')
+    save.close()
 
 
 def show_stats(save_data):
