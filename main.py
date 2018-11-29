@@ -183,32 +183,50 @@ def choices(save_data):
 
 
 # Homeland
+# The documentation here and above are generally the same for all level functions
 def level1(save_data):
+    # Give the player an over-vue of the situation in the game.
     print('You and your men begin preparing for their invasion on Castle Bhutan.')
     print("Stepping into the marketplace you wonder what supplies you'll need for")
     print('the journey ahead or if you should hire any more loyal men.')
     print()
     choice = ''
+    # Keep letting the player choose options until they decide to continue to the next level
     while choice != 'c':
+        # Give the player several options that will result in stats changes
+        # Change the input to lowercase so the player's input is case insensitive
         choice = (input('[B]uy 5 Food (5 gold)     [H]ire Men (10 gold)     [C]ontinue Onward\n')).lower()
+        # Make sure the player's choice is a valid option
         while choice != 'b' and choice != 'h' and choice != 'c':
             choice = (input('Choose a valid option\n')).lower()
 
+        # If this choice is chosen, change the stats accordingly then
+        # display a message telling the player what occurred
         if choice == 'b' and int(save_data[1]) >= 5:
             save_data[2] = str(int(save_data[2]) + 5)
             save_data[1] = str(int(save_data[1]) - 5)
             print(save_data[1] + ' gold left')
+        # If the player doesn't have the required gold, don't change
+        # the stats and tell them what went wrong
         elif choice == 'b' and int(save_data[1]) < 5:
             print("You don't have enough gold for that!")
 
+        # If this choice is chosen, change the stats accordingly then
+        # display a message telling the player what occurred
         if choice == 'h' and int(save_data[1]) >= 10:
             save_data[0] = str(int(save_data[0]) + 1)
             save_data[1] = str(int(save_data[1]) - 10)
             print(save_data[1] + ' gold left')
+        # If the player doesn't have the required gold, don't change
+        # the stats and tell them what went wrong
         elif choice == 'h' and int(save_data[1]) < 10:
             print("You don't have enough gold for that!")
+
+    # Tell the player that they are moving on to a different level
     print()
     print('You and your men set off on their invasion.')
+    # Change the stat in the game data associated with this level
+    # from 0 to 1 to indicate that it was completed
     save_data[3] = 1
 
 
