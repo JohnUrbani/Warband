@@ -94,6 +94,8 @@ def game_loop(save_data):
     while int(save_data[0]) > 0 and int(save_data[2]) > 0:
         # Display the stats for the player (Men, Gold, and Food)
         show_stats(save_data)
+        # Display art for the given level
+        display_art(save_data)
         # Go into the next level and give the player options to choose from
         choices(save_data)
         # Clear the screen
@@ -161,6 +163,30 @@ def choices(save_data):
     # Calculate food lost between levels and lower the food count
     food_loss = str(int(save_data[0]) // 2)
     save_data[2] = str(int(save_data[2]) - int(food_loss))
+
+
+# Displays art associated with each level
+def display_art(save_data):
+    if save_data[3] == '0':
+        print((open('art/homeland.txt', 'r').read()))
+    elif save_data[4] == '0':
+        print((open('art/tree.txt', 'r').read()))
+    elif save_data[5] == '0':
+        print((open('art/village1.txt', 'r').read()))
+    elif save_data[6] == '0':
+        print((open('art/mountain.txt', 'r').read()))
+    elif save_data[7] == '0':
+        print((open('art/tree.txt', 'r').read()))
+    elif save_data[8] == '0':
+        print((open('art/village2.txt', 'r').read()))
+    elif save_data[9] == '0':
+        print((open('art/plains.txt', 'r').read()))
+    elif save_data[10] == '0':
+        print((open('art/castleindistance.txt', 'r').read()))
+    elif save_data[11] == '0':
+        print((open('art/castle.txt', 'r').read()))
+    elif save_data[12] == '0':
+        print((open('art/castle.txt', 'r').read()))
 
 
 # Each level follows a standard formula, print 3 to 4 lines to tell the player about
@@ -380,6 +406,7 @@ def level5(save_data):
             print('This forest appears relatively safe, however the party')
             print('wishes to not waste anymore time here.')
             print('The hunting party returned with', food_gained, 'food.')
+            hunted = True
         elif choice == 'h' and hunted:
             print('While this forest appears relatively safe, the party')
             print('wishes to not waste anymore time here.')
@@ -448,8 +475,8 @@ def level6(save_data):
 # Plains
 def level7(save_data):
     print('You enter the vast plains.')
-    print('It dawns on you that the rolling hills are completely empty.')
-    print('Some of the ground appears scorched and the grass dead.')
+    print('It dawns on you that the rolling hills are completely empty')
+    print('but the few trees littering the field.')
     print()
     choice = ''
     while choice != 'c':
@@ -542,6 +569,7 @@ def game_over_check(save_data):
     if int(save_data[0]) <= 0:
         print('Losing your last men, you find yourself alone.')
         print('You cannot continue the invasion by yourself.')
+        print((open('art/gameover.txt', 'r').read()))
         print('GAME OVER')
         # Give the player the option to restart or exit the game
         play_or_exit()
@@ -550,6 +578,7 @@ def game_over_check(save_data):
     if int(save_data[2]) <= 0:
         print('With your food supplies dwindling, your men return home.')
         print('You cannot continue the invasion by yourself.')
+        print((open('art/gameover.txt', 'r').read()))
         print('GAME OVER')
         # Give the player the option to restart or exit the game
         play_or_exit()
