@@ -1,0 +1,23 @@
+This game plays similarly to Oregon Trail.
+
+Type in the letter associated with an action, such as [C]ontinue meaning
+that you have to type 'c' or 'C' to continue on in the game.
+
+The game keeps track of 3 stats, all saved in the save.txt file, being
+the number of men, the amount of gold, and the amount of food. If either
+the men or the food levels drop to 0 or less you will get a game over screen
+and be asked to either exit or restart the game from the beginning.
+
+The easiest way to run the game so the art looks nice is to run it in
+IDLE. I have play tested it in IDLE, the windows command prompt, and
+PyCharm, all of these will work however PyCharm will stretch the ASCII
+art and make it harder to play.
+
+Nothing special has to be done when launching the file, simply open it
+in IDLE and run the program. The art folder and all of the ASCII art
+inside does need to be in there, however it won't crash the game if its
+missing, just remove all of the art.
+
+The save.txt file will be written over when a new game is started and after
+each area is completed. It holds player stats and what areas the player has
+already completed so that you can continue where you left off.

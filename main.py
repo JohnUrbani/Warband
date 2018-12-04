@@ -54,28 +54,31 @@ def main():
 
 # Creates or updates the save file into its default, new game, state
 def new_save():
-    save = open(SAVE_FILE, 'w')
-    # File saved with these stats, split by commas
-    # save_data[0] Men (0-50)
-    # save_data[1] Money (0-infinity)
-    # save_data[2] Food (0-infinity)
-    # save_data[3:] Claimed Territory (0 or 1) in this order
-    # Homeland 0 (Purchase food & men)
-    # Forest 0 (Hunt for food, encounter bandits, lose random numbers of men (0-4))
-    # Village 0 (Recruit men (Get 0-3 men), buy food, threaten for food and men (Get 0-6 men, 0-20 food, lose 0-2 men))
-    # Mountain Pass 0 (Set up camp or continue, if continued, skip to the next forest but lose men from the conditions)
-    # Mountain 0 (Continue to forest)
-    # Forest 0 (Hunt for food)
-    # Village 0 (Recruit men (Get 0-3 men), buy food, threaten for food and men (Get 0-6 men, 0-20 food, lose 0-2 men))
-    # Plains 0 (Empty)
-    # PreCastle 0 (Set up camp/prep for battle or go to battle immediately)
-    # Castle 0 (Lose 8-20 men, if survived you win)
-    # Castle after camp 0 (Lose 5-12 men, if survived you win)
-    save_data = ['10', '20', '20', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0']
-    # Write the data from the list into the file
-    for val in save_data:
-        save.write(val + ',')
-    save.close()
+    try:
+        save = open(SAVE_FILE, 'w')
+        # File saved with these stats, split by commas
+        # save_data[0] Men (0-50)
+        # save_data[1] Money (0-infinity)
+        # save_data[2] Food (0-infinity)
+        # save_data[3:] Claimed Territory (0 or 1) in this order
+        # Homeland 0 (Purchase food & men)
+        # Forest 0 (Hunt for food, encounter bandits, lose random numbers of men (0-4))
+        # Village 0 (Recruit men (Get 0-3 men), buy food, threaten for food and men (Get 0-6 men, 0-20 food, lose 0-2 men))
+        # Mountain Pass 0 (Set up camp or continue, if continued, skip to the next forest but lose men from the conditions)
+        # Mountain 0 (Continue to forest)
+        # Forest 0 (Hunt for food)
+        # Village 0 (Recruit men (Get 0-3 men), buy food, threaten for food and men (Get 0-6 men, 0-20 food, lose 0-2 men))
+        # Plains 0 (Empty)
+        # PreCastle 0 (Set up camp/prep for battle or go to battle immediately)
+        # Castle 0 (Lose 8-20 men, if survived you win)
+        # Castle after camp 0 (Lose 5-12 men, if survived you win)
+        save_data = ['10', '20', '20', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0']
+        # Write the data from the list into the file
+        for val in save_data:
+            save.write(val + ',')
+        save.close()
+    except IOError:
+        print('File writing error has occurred')
 
 
 # Read the save file, clear the screen, then start the game loop
@@ -84,6 +87,23 @@ def start():
     save = open(SAVE_FILE, 'r')
     save_data = save.readline().split(',')
     save.close()
+    clear_screen()
+    print('Welcome to Warband')
+    print()
+    print('In this game you will choose from a variety of options that will')
+    print('cause different events to occur. The game involves you and a party')
+    print('of men seeking to take over a castle. If you run out of men or food')
+    print('then you will have to try again.')
+    print()
+    print('This game saves after each area, so if you need to put the game down')
+    print('you can continue where you left off.')
+    print()
+    print('To choose an option, type in the letter with brackets.')
+    print('These options are not case sensitive.')
+    print()
+    choice = input('Lets give it a try, type [C] to [C]ontinue: ').lower()
+    while choice != 'c':
+        choice = input('Just type [C]: ')
     clear_screen()
     game_loop(save_data)
 
@@ -167,26 +187,29 @@ def choices(save_data):
 
 # Displays art associated with each level
 def display_art(save_data):
-    if save_data[3] == '0':
-        print((open('art/homeland.txt', 'r').read()))
-    elif save_data[4] == '0':
-        print((open('art/tree.txt', 'r').read()))
-    elif save_data[5] == '0':
-        print((open('art/village1.txt', 'r').read()))
-    elif save_data[6] == '0':
-        print((open('art/mountain.txt', 'r').read()))
-    elif save_data[7] == '0':
-        print((open('art/tree.txt', 'r').read()))
-    elif save_data[8] == '0':
-        print((open('art/village2.txt', 'r').read()))
-    elif save_data[9] == '0':
-        print((open('art/plains.txt', 'r').read()))
-    elif save_data[10] == '0':
-        print((open('art/castleindistance.txt', 'r').read()))
-    elif save_data[11] == '0':
-        print((open('art/castle.txt', 'r').read()))
-    elif save_data[12] == '0':
-        print((open('art/castle.txt', 'r').read()))
+    try:
+        if save_data[3] == '0':
+            print((open('art/homeland.txt', 'r').read()))
+        elif save_data[4] == '0':
+            print((open('art/tree.txt', 'r').read()))
+        elif save_data[5] == '0':
+            print((open('art/village1.txt', 'r').read()))
+        elif save_data[6] == '0':
+            print((open('art/mountain.txt', 'r').read()))
+        elif save_data[7] == '0':
+            print((open('art/tree.txt', 'r').read()))
+        elif save_data[8] == '0':
+            print((open('art/village2.txt', 'r').read()))
+        elif save_data[9] == '0':
+            print((open('art/plains.txt', 'r').read()))
+        elif save_data[10] == '0':
+            print((open('art/castleindistance.txt', 'r').read()))
+        elif save_data[11] == '0':
+            print((open('art/castle.txt', 'r').read()))
+        elif save_data[12] == '0':
+            print((open('art/castle.txt', 'r').read()))
+    except IOError:
+        print('Image failed to load, check that art folder exists')
 
 
 # Each level follows a standard formula, print 3 to 4 lines to tell the player about
@@ -370,6 +393,8 @@ def level4(save_data):
         print('The storm is gone by the morning and you begin traveling again.')
         print('During the night your men ate their ration of food.')
         print('You hastily exit the pass spotting a road.')
+        while choice != 'c':
+            choice = (input('[C]ontinue Onward\n')).lower()
 
     if choice == 'c':
         men_lost = random.randint(1, 3)
@@ -378,6 +403,9 @@ def level4(save_data):
         print('However it catches up quickly,', str(men_lost), 'men sustain injuries from falls and cuts.')
         print('These men drop out of your party as you exit the mountain pass,')
         print('no longer in any condition to battle.')
+        choice = ''
+        while choice != 'c':
+            choice = (input('[C]ontinue Onward\n')).lower()
 
     show_stats(save_data)
     game_over_check(save_data)
